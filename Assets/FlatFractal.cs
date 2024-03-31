@@ -1,12 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-struct FractalPart
-{
-    public Vector3 direction;
-    public Quaternion rotation;
-    public Transform transform;
-}
 
 public class FlatFractal : MonoBehaviour
 {
@@ -18,7 +12,7 @@ public class FlatFractal : MonoBehaviour
     [SerializeField]
     Material material;
 
-    [SerializeField, Range(1,8)]
+    [SerializeField, Range(1, 8)]
     int depth = 4;
 
     static Vector3[] directions = {
@@ -33,12 +27,12 @@ public class FlatFractal : MonoBehaviour
 
     private void Awake() {
         parts = new FractalPart[depth][];
-        for(int i = 0, length = 1; i < parts.Length; i++, length *= 5) {
+        for (int i = 0, length = 1; i < parts.Length; i++, length *= 5) {
             parts[i] = new FractalPart[length];
         }
         float scale = 1f;
         parts[0][0] = CreatePart(0, 0, scale);
-        for(int li = 1; li < parts.Length; li++) {
+        for (int li = 1; li < parts.Length; li++) {
             scale *= 0.5f;
             FractalPart[] levelParts = parts[li];
             for (int fpi = 0; fpi < levelParts.Length; fpi += 5) {
